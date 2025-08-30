@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import in.abhijeet.expensetracker.service.ExpenseService;
+import in.abhijeet.expensetracker.service.UserService;
 import jakarta.validation.Valid;
 import in.abhijeet.expensetracker.entity.Expense;
 
@@ -25,6 +26,9 @@ public class ExpenseController {
 	
 	@Autowired
 	private ExpenseService expenseService;
+	
+	@Autowired
+	private UserService userService;
 	
 	@GetMapping("/expenses")
 	public List<Expense> getAllExpenses()
@@ -54,6 +58,7 @@ public class ExpenseController {
 	@PostMapping("/expenses")
 	public Expense saveExpenseDetails(@Valid @RequestBody Expense expense)
 	{
+		expense.setUser(userService.getLoggedInUser());
 		return expenseService.saveExpenseByDetails(expense);
 	}
 	
