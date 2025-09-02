@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,22 +19,22 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
-	@GetMapping("/users/{id}")
-	public ResponseEntity<User> readUser(@PathVariable Long id)
+	@GetMapping("/profile")
+	public ResponseEntity<User> readUser()
 	{
-		return new ResponseEntity<User>(userService.readUser(id),HttpStatus.OK);
+		return new ResponseEntity<User>(userService.readUser(),HttpStatus.OK);
 	}
 	
-	@PutMapping("/users/{id}")
-	public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody UserModel user)
+	@PutMapping("/profile")
+	public ResponseEntity<User> updateUser(@RequestBody UserModel user)
 	{
-		return new ResponseEntity<User>(userService.updateUser(user, id),HttpStatus.OK);
+		return new ResponseEntity<User>(userService.updateUser(user),HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/users/{id}")
-	public ResponseEntity<HttpStatus> deleteUser(@PathVariable Long id)
+	@DeleteMapping("deactivate")
+	public ResponseEntity<HttpStatus> deleteUser()
 	{
-		userService.deleteUser(id);
+		userService.deleteUser();
 		return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
 	}
 
