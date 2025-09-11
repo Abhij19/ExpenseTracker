@@ -44,7 +44,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
 		return new ResponseEntity<ErrorObject>(error,HttpStatus.BAD_REQUEST);
 	}
 	
-	@Override
+	
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(
 	        MethodArgumentNotValidException ex,
 	        HttpHeaders headers,

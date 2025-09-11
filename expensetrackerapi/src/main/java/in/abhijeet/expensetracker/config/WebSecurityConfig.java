@@ -23,12 +23,6 @@ public class WebSecurityConfig{
 	@Autowired
 	private CustomUserDetailsService service;
 	
-	@Bean
-	public JwtRequestFilter authenticationJwtTokenFilter()
-	{
-		return new JwtRequestFilter();
-	}
-	
 	// Below method will allow all users to access login and register API rest will need authentication
 	@Bean
 	    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -54,6 +48,11 @@ public class WebSecurityConfig{
 	        return new BCryptPasswordEncoder();
 	    }
     
+    @Bean
+	JwtRequestFilter authenticationJwtTokenFilter()
+	{
+		return new JwtRequestFilter();
+	}
     @Bean
     DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
