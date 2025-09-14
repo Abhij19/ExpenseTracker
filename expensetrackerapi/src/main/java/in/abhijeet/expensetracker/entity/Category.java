@@ -10,7 +10,6 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.annotation.processing.Generated;
 import java.sql.Timestamp;
 
 @Data
@@ -35,6 +34,7 @@ public class Category {
     @UpdateTimestamp
     private Timestamp updatedAt;
 
+    //Multiple categories belong to one user
     @ManyToOne(fetch = FetchType.LAZY,optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)

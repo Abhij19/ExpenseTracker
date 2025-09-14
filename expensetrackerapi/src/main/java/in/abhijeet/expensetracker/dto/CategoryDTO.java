@@ -1,4 +1,4 @@
-package in.abhijeet.expensetracker.io;
+package in.abhijeet.expensetracker.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,12 +6,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CategoryResponse {
+public class CategoryDTO {
 
     private String categoryId;
     private String name;
@@ -19,4 +18,5 @@ public class CategoryResponse {
     private String categoryIcon;
     private Timestamp createdAt;
     private Timestamp updatedAt;
+    private UserDTO userDTO;
 }
