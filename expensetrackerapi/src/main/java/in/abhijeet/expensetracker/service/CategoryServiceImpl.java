@@ -4,6 +4,7 @@ import in.abhijeet.expensetracker.dto.CategoryDTO;
 import in.abhijeet.expensetracker.dto.UserDTO;
 import in.abhijeet.expensetracker.entity.Category;
 import in.abhijeet.expensetracker.entity.User;
+import in.abhijeet.expensetracker.exceptions.ItemAlreadyExistsException;
 import in.abhijeet.expensetracker.exceptions.ResourceNotFoundException;
 import in.abhijeet.expensetracker.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
@@ -41,6 +42,13 @@ public class CategoryServiceImpl implements CategoryService{
      * */
     @Override
     public CategoryDTO saveCategory(CategoryDTO categoryDTO) {
+
+        boolean category = categoryRepository.existsByNameAndUserId(categoryDTO.getName(),
+                userService.getLoggedInUser().getId());
+        if(category)
+        {
+            throw new ItemAlreadyExistsException("Category is already present for the name : " + categoryDTO.getName());
+        }
         // Map incoming DTO object from controller to JPA Entity
         Category newCategory = mapToEntity(categoryDTO);
         // save entity object to DB

@@ -24,7 +24,14 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
     /**
      * finder method fetch the category by user id and category id
      * @param userId, categoryId
-     * @return Optional<CategoryEntity>
+     * @return Optional<Category>
      * */
     Optional<Category> findByUserIdAndCategoryId(Long userId, String categoryId);
+
+    /**
+     * finder method check if the category already exist by name and user id
+     * @param  name, userId,
+     * @return Optional<Category>
+     * */
+    boolean existsByNameAndUserId(String name, Long userId);
 }
